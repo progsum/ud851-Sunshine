@@ -17,6 +17,7 @@ package com.example.android.sunshine.utilities;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -125,9 +126,9 @@ public final class OpenWeatherJsonUtils {
              * It confuses everybody. Temp could easily mean any number of things, including
              * temperature, temporary and is just a bad variable name.
              */
-            JSONObject temperatureObject = dayForecast.getJSONObject(OWM_TEMPERATURE);
-            high = temperatureObject.getDouble(OWM_MAX);
-            low = temperatureObject.getDouble(OWM_MIN);
+            JSONObject temperatureObject = dayForecast.getJSONObject("main");//OWM_TEMPERATURE
+            high = temperatureObject.getDouble("temp_"+OWM_MAX);
+            low = temperatureObject.getDouble("temp_"+OWM_MIN);
             highAndLow = SunshineWeatherUtils.formatHighLows(context, high, low);
 
             parsedWeatherData[i] = date + " - " + description + " - " + highAndLow;
